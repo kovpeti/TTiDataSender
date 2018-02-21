@@ -1,2 +1,2 @@
 # TTiDataSender
-TTi-1604 multimeter an Excel bridge
+TTi-1604 multimeter and Excel bridge
