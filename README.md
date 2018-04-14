@@ -2,7 +2,7 @@
 TTi-1604 multimeter and Excel bridge
 
 Test engineers know what a real pain when testing a board a lot of measured value need to be entered into a sheet.
-This software exist because I know. So let's to automatize a more a bit!
+This software exist because I know. So let's to automatize a bit more!
 
 This software reads measured value from TTi-1604 multimeter and sends this value to EXCEL or other selected program.
 
