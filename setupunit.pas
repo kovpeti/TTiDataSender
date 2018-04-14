@@ -15,24 +15,19 @@ type
   TSetupForm = class(TForm)
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    CommPortsComboBox: TComboBox;
+    Label2: TLabel;
     Label5: TLabel;
     TargetSwRadioGroup: TRadioGroup;
     SendEnterCheckBox: TCheckBox;
-    CommPortsComboBox: TComboBox;
-    CommSpeedComboBox: TComboBox;
-    Label1: TLabel;
-    Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     PageControl1: TPageControl;
-    RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
-    RadioGroup3: TRadioGroup;
     RoundSpinEdit: TSpinEdit;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     TSwComboBox: TComboBox;
     procedure FormCreate(Sender: TObject);
+    procedure Label2Click(Sender: TObject);
     procedure TargetSwRadioGroupClick(Sender: TObject);
   private
     { private declarations }
@@ -70,12 +65,17 @@ begin
      TargetSwRadioGroupClick(self);
 end;
 
+procedure TSetupForm.Label2Click(Sender: TObject);
+begin
+
+end;
+
 procedure TSetupForm.TargetSwRadioGroupClick(Sender: TObject);
 begin
      case TargetSwRadioGroup.ItemIndex of
           0:begin
                  TSwComboBox.Enabled:=false;
-                 TSwComboBox.Text:='excel.exe';
+                 TSwComboBox.Text:='EXCEL.EXE';
           end;
           1:begin
                  TSwComboBox.Enabled:=false;

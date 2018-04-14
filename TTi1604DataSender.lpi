@@ -18,9 +18,9 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="6"/>
-      <BuildNr Value="2"/>
-      <StringTable CompanyName="Petitech.tk" InternalName="TTi1604DataSender" LegalCopyright="GNU GPL V3" OriginalFilename="TTi1604DataSender" ProductName="TTi1604DataSender" ProductVersion="0.1.6"/>
+      <RevisionNr Value="7"/>
+      <BuildNr Value="12"/>
+      <StringTable CompanyName="Petitech.tk" InternalName="TTi1604DataSender" LegalCopyright="GNU GPL V3" OriginalFilename="TTi1604DataSender" ProductName="TTi1604DataSender" ProductVersion="0.1.7"/>
     </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>
@@ -103,19 +103,22 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="4">
+    <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="DataPortLasarus"/>
+        <PackageName Value="PTIndustrial"/>
       </Item1>
       <Item2>
-        <PackageName Value="industrial"/>
+        <PackageName Value="DataPortLasarus"/>
       </Item2>
       <Item3>
-        <PackageName Value="lazmouseandkeyinput"/>
+        <PackageName Value="industrial"/>
       </Item3>
       <Item4>
-        <PackageName Value="LCL"/>
+        <PackageName Value="lazmouseandkeyinput"/>
       </Item4>
+      <Item5>
+        <PackageName Value="LCL"/>
+      </Item5>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

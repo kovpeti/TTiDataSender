@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="10"/>
     <BuildModes Active="Release"/>
-    <Units Count="29">
+    <Units Count="34">
       <Unit0>
         <Filename Value="TTi1604DataSender.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
         <CursorPos Y="19"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,9 +20,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="408"/>
-        <CursorPos X="34" Y="410"/>
-        <UsageCount Value="74"/>
+        <TopLine Value="68"/>
+        <CursorPos X="21" Y="77"/>
+        <FoldState Value=" TM HlL31x"/>
+        <UsageCount Value="79"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -33,8 +34,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="36" Y="9"/>
-        <UsageCount Value="71"/>
+        <CursorPos X="46" Y="78"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -45,9 +46,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="12"/>
-        <CursorPos X="52" Y="28"/>
-        <UsageCount Value="66"/>
+        <CursorPos X="17" Y="42"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -60,60 +60,60 @@
         <UsageCount Value="51"/>
       </Unit4>
       <Unit5>
-        <Filename Value="..\..\fpc\3.0.2\source\packages\winunits-jedi\src\jwawinuser.pas"/>
+        <Filename Value="D:\fpc\3.0.2\source\packages\winunits-jedi\src\jwawinuser.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="6840"/>
         <CursorPos X="23" Y="6864"/>
         <UsageCount Value="17"/>
       </Unit5>
       <Unit6>
-        <Filename Value="..\..\components\mouseandkeyinput\mouseandkeyinput.pas"/>
+        <Filename Value="D:\components\mouseandkeyinput\mouseandkeyinput.pas"/>
         <UnitName Value="MouseAndKeyInput"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="14"/>
       </Unit6>
       <Unit7>
-        <Filename Value="..\..\fpc\3.0.2\source\rtl\objpas\classes\classesh.inc"/>
+        <Filename Value="D:\fpc\3.0.2\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="81"/>
         <CursorPos X="38" Y="102"/>
         <UsageCount Value="13"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\..\components\mouseandkeyinput\mouseinputintf.pas"/>
+        <Filename Value="D:\components\mouseandkeyinput\mouseinputintf.pas"/>
         <UnitName Value="MouseInputIntf"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="6"/>
       </Unit8>
       <Unit9>
-        <Filename Value="..\..\components\mouseandkeyinput\keyinputintf.pas"/>
+        <Filename Value="D:\components\mouseandkeyinput\keyinputintf.pas"/>
         <UnitName Value="KeyInputIntf"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="9"/>
       </Unit9>
       <Unit10>
-        <Filename Value="..\..\components\mouseandkeyinput\winkeyinput.pas"/>
+        <Filename Value="D:\components\mouseandkeyinput\winkeyinput.pas"/>
         <UnitName Value="WinKeyInput"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <UsageCount Value="9"/>
       </Unit10>
       <Unit11>
-        <Filename Value="..\..\components\dataport-master\DataPortSerial.pas"/>
+        <Filename Value="D:\components\dataport-master\DataPortSerial.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="96"/>
         <CursorPos X="20" Y="126"/>
         <UsageCount Value="19"/>
       </Unit11>
       <Unit12>
-        <Filename Value="..\..\components\synalist-code-207-trunk\synaser.pas"/>
+        <Filename Value="D:\components\synalist-code-207-trunk\synaser.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="625"/>
         <CursorPos X="11" Y="133"/>
         <UsageCount Value="18"/>
       </Unit12>
       <Unit13>
-        <Filename Value="..\..\lcl\controls.pp"/>
+        <Filename Value="D:\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
@@ -121,49 +121,49 @@
         <UsageCount Value="11"/>
       </Unit13>
       <Unit14>
-        <Filename Value="..\..\fpc\3.0.2\source\rtl\objpas\sysutils\sysstrh.inc"/>
+        <Filename Value="D:\fpc\3.0.2\source\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="132"/>
         <CursorPos X="10" Y="153"/>
         <UsageCount Value="8"/>
       </Unit14>
       <Unit15>
-        <Filename Value="..\..\fpc\3.0.2\source\rtl\objpas\sysutils\sysinth.inc"/>
+        <Filename Value="D:\fpc\3.0.2\source\rtl\objpas\sysutils\sysinth.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="3" Y="33"/>
         <UsageCount Value="8"/>
       </Unit15>
       <Unit16>
-        <Filename Value="..\..\lcl\include\control.inc"/>
+        <Filename Value="D:\lcl\include\control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3254"/>
         <CursorPos Y="3290"/>
         <UsageCount Value="7"/>
       </Unit16>
       <Unit17>
-        <Filename Value="..\..\lcl\include\comboex.inc"/>
+        <Filename Value="D:\lcl\include\comboex.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="162"/>
         <CursorPos Y="179"/>
         <UsageCount Value="17"/>
       </Unit17>
       <Unit18>
-        <Filename Value="..\..\components\dataport-master\DataPortUART.pas"/>
+        <Filename Value="D:\components\dataport-master\DataPortUART.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="232"/>
         <CursorPos X="11" Y="267"/>
         <UsageCount Value="14"/>
       </Unit18>
       <Unit19>
-        <Filename Value="..\..\components\dataport-master\DataPort.pas"/>
+        <Filename Value="D:\components\dataport-master\DataPort.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="15"/>
         <CursorPos X="3" Y="42"/>
         <UsageCount Value="14"/>
       </Unit19>
       <Unit20>
-        <Filename Value="..\..\components\dataport-master\demo\mainform.pas"/>
+        <Filename Value="D:\components\dataport-master\demo\mainform.pas"/>
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -172,14 +172,14 @@
         <UsageCount Value="14"/>
       </Unit20>
       <Unit21>
-        <Filename Value="..\..\fpc\3.0.2\source\rtl\inc\objpash.inc"/>
+        <Filename Value="D:\fpc\3.0.2\source\rtl\inc\objpash.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="172"/>
         <CursorPos X="23" Y="193"/>
         <UsageCount Value="14"/>
       </Unit21>
       <Unit22>
-        <Filename Value="..\..\lcl\lcltype.pp"/>
+        <Filename Value="D:\lcl\lcltype.pp"/>
         <UnitName Value="LCLType"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="405"/>
@@ -187,7 +187,7 @@
         <UsageCount Value="13"/>
       </Unit22>
       <Unit23>
-        <Filename Value="..\..\ide\aboutfrm.pas"/>
+        <Filename Value="D:\ide\aboutfrm.pas"/>
         <ComponentName Value="AboutForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -198,7 +198,7 @@
         <UsageCount Value="10"/>
       </Unit23>
       <Unit24>
-        <Filename Value="..\..\lcl\lclintf.pas"/>
+        <Filename Value="D:\lcl\lclintf.pas"/>
         <UnitName Value="LCLIntf"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="7"/>
@@ -217,7 +217,7 @@
         <UsageCount Value="12"/>
       </Unit25>
       <Unit26>
-        <Filename Value="..\..\fpc\3.0.2\source\packages\winunits-jedi\src\jwawintype.pas"/>
+        <Filename Value="D:\fpc\3.0.2\source\packages\winunits-jedi\src\jwawintype.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="123"/>
         <CursorPos X="8" Y="144"/>
@@ -236,128 +236,126 @@
         <TopLine Value="265"/>
         <UsageCount Value="9"/>
       </Unit28>
+      <Unit29>
+        <Filename Value="C:\lazarus\lcl\actnlist.pas"/>
+        <UnitName Value="ActnList"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="219"/>
+        <CursorPos X="14" Y="233"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="C:\lazarus\lcl\lcltype.pp"/>
+        <UnitName Value="LCLType"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="457"/>
+        <CursorPos X="3" Y="403"/>
+        <UsageCount Value="12"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="C:\lazarus\components\TPTIndustrial\source\tti1604comm.pas"/>
+        <UnitName Value="TTi1604comm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="146"/>
+        <CursorPos X="64" Y="142"/>
+        <UsageCount Value="11"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="C:\lazarus\components\TPTIndustrial\source\tti1604buttonpanel.pas"/>
+        <UnitName Value="TTi1604ButtonPanel"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="11"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="C:\lazarus\components\TPTIndustrial\source\tti1604dsplpanel.pas"/>
+        <UnitName Value="TTi1604DsplPanel"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="89"/>
+        <CursorPos X="9" Y="179"/>
+        <UsageCount Value="11"/>
+      </Unit33>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="465" Column="3" TopLine="463"/>
+        <Caret Line="334" TopLine="329"/>
       </Position1>
       <Position2>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="466" Column="3" TopLine="464"/>
+        <Caret Line="333" TopLine="328"/>
       </Position2>
       <Position3>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="467" Column="3" TopLine="465"/>
+        <Caret Line="392" TopLine="367"/>
       </Position3>
       <Position4>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="468" Column="3" TopLine="466"/>
+        <Caret Line="472" TopLine="448"/>
       </Position4>
       <Position5>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="469" Column="3" TopLine="467"/>
+        <Caret Line="465" Column="31" TopLine="432"/>
       </Position5>
       <Position6>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="470" Column="3" TopLine="468"/>
+        <Caret Line="103" TopLine="87"/>
       </Position6>
       <Position7>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="471" Column="3" TopLine="469"/>
+        <Caret Line="249" TopLine="235"/>
       </Position7>
       <Position8>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="472" Column="3" TopLine="470"/>
+        <Caret Line="260" TopLine="234"/>
       </Position8>
       <Position9>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="471" Column="3" TopLine="469"/>
+        <Caret Line="273" TopLine="254"/>
       </Position9>
       <Position10>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="470" Column="3" TopLine="468"/>
+        <Caret Line="351" Column="59" TopLine="322"/>
       </Position10>
       <Position11>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="469" Column="3" TopLine="467"/>
+        <Caret Line="401" TopLine="14"/>
       </Position11>
       <Position12>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="468" Column="3" TopLine="466"/>
+        <Caret Line="418" Column="34" TopLine="398"/>
       </Position12>
       <Position13>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="467" Column="3" TopLine="465"/>
+        <Caret Line="419" Column="34" TopLine="399"/>
       </Position13>
       <Position14>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="466" Column="3" TopLine="464"/>
+        <Caret Line="418" Column="34" TopLine="403"/>
       </Position14>
       <Position15>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="465" Column="3" TopLine="463"/>
+        <Caret Line="53" Column="22" TopLine="37"/>
       </Position15>
       <Position16>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="537"/>
+        <Caret Line="351" Column="53" TopLine="323"/>
       </Position16>
       <Position17>
-        <Filename Value="setupunit.pas"/>
-        <Caret Line="9" Column="36"/>
+        <Filename Value="mainunit.pas"/>
+        <Caret Line="53" Column="22" TopLine="37"/>
       </Position17>
       <Position18>
-        <Filename Value="aboutunit.pas"/>
-        <Caret Line="28" Column="52" TopLine="12"/>
+        <Filename Value="mainunit.pas"/>
+        <Caret Line="368" Column="53" TopLine="340"/>
       </Position18>
       <Position19>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="224" Column="4" TopLine="208"/>
+        <Caret Line="273" Column="15" TopLine="6"/>
       </Position19>
       <Position20>
         <Filename Value="mainunit.pas"/>
-        <Caret Line="223" TopLine="208"/>
+        <Caret Line="9" Column="3" TopLine="6"/>
       </Position20>
-      <Position21>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="239" TopLine="223"/>
-      </Position21>
-      <Position22>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="297" TopLine="281"/>
-      </Position22>
-      <Position23>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="77" Column="46" TopLine="62"/>
-      </Position23>
-      <Position24>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="81" Column="7" TopLine="65"/>
-      </Position24>
-      <Position25>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="557" TopLine="541"/>
-      </Position25>
-      <Position26>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="620" TopLine="604"/>
-      </Position26>
-      <Position27>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="130" TopLine="114"/>
-      </Position27>
-      <Position28>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="133" TopLine="117"/>
-      </Position28>
-      <Position29>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="135" TopLine="119"/>
-      </Position29>
-      <Position30>
-        <Filename Value="mainunit.pas"/>
-        <Caret Line="425" TopLine="398"/>
-      </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
