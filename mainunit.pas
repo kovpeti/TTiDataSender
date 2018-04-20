@@ -415,9 +415,14 @@ var Ok:boolean;
 begin
      try
         TTi1604Comm1.Active:=true;
+        StartAction.Enabled:=false;
+        StopAction.Enabled:=true;
      except
-       on E: Exception do
+       on E: Exception do begin
           ShowMessage(E.Message);
+          StartAction.Enabled:=true;
+          StopAction.Enabled:=false;
+       end;
      end;
      UpdateStatusBar;
 end;
