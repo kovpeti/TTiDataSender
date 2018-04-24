@@ -19,7 +19,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="7"/>
-      <BuildNr Value="12"/>
+      <BuildNr Value="15"/>
       <StringTable CompanyName="Petitech.tk" InternalName="TTi1604DataSender" LegalCopyright="GNU GPL V3" OriginalFilename="TTi1604DataSender" ProductName="TTi1604DataSender" ProductVersion="0.1.7"/>
     </VersionInfo>
     <BuildModes Count="3">
@@ -103,22 +103,19 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="4">
       <Item1>
         <PackageName Value="PTIndustrial"/>
       </Item1>
       <Item2>
-        <PackageName Value="DataPortLasarus"/>
+        <PackageName Value="industrial"/>
       </Item2>
       <Item3>
-        <PackageName Value="industrial"/>
+        <PackageName Value="lazmouseandkeyinput"/>
       </Item3>
       <Item4>
-        <PackageName Value="lazmouseandkeyinput"/>
-      </Item4>
-      <Item5>
         <PackageName Value="LCL"/>
-      </Item5>
+      </Item4>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>
@@ -167,7 +164,7 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="3">
+    <Exceptions Count="4">
       <Item1>
         <Name Value="EAbort"/>
       </Item1>
@@ -177,6 +174,9 @@
       <Item3>
         <Name Value="EFOpenError"/>
       </Item3>
+      <Item4>
+        <Name Value="EConvertError"/>
+      </Item4>
     </Exceptions>
   </Debugging>
 </CONFIG>

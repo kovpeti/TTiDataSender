@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 851
+  Left = 324
   Height = 276
-  Top = 580
+  Top = 290
   Width = 400
   BorderStyle = bsDialog
   Caption = 'TTi-1604 Data Sender'
@@ -196,7 +196,7 @@ object MainForm: TMainForm
     TabOrder = 4
     Signs = []
     Value = 0
-    Text = '00000'
+    Text = ' OFF'
   end
   object ActionList1: TActionList
     Images = ImageList1
@@ -780,5 +780,37 @@ object MainForm: TMainForm
     Display = TTi1604DsplPanel1
     left = 72
     top = 120
+  end
+  object XMLPropStorage1: TXMLPropStorage
+    StoredValues = <    
+      item
+        Name = 'ComPort'
+      end    
+      item
+        Name = 'Round'
+      end    
+      item
+        Name = 'MsgSystem'
+      end    
+      item
+        Name = 'TargetSystem'
+      end    
+      item
+        Name = 'TargetSoftware'
+      end    
+      item
+        Name = 'SendEnter'
+      end    
+      item
+        Name = 'MoveCursor'
+      end    
+      item
+        Name = 'SaveSettings'
+      end>
+    Active = False
+    OnSavingProperties = XMLPropStorage1SavingProperties
+    OnRestoreProperties = XMLPropStorage1RestoreProperties
+    left = 16
+    top = 200
   end
 end

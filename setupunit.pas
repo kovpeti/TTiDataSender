@@ -15,19 +15,26 @@ type
   TSetupForm = class(TForm)
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    CommPortsComboBox: TComboBox;
-    Label2: TLabel;
-    Label5: TLabel;
-    TargetSwRadioGroup: TRadioGroup;
-    SendEnterCheckBox: TCheckBox;
-    Label3: TLabel;
+    SaveSettingsCheckBox: TCheckBox;
     Label4: TLabel;
-    PageControl1: TPageControl;
+    RoundGroupBox: TGroupBox;
+    Label5: TLabel;
+    MoveCursorComboBox: TComboBox;
+    CommPortsComboBox: TComboBox;
+    MoveCursorGroupBox: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    MsgSystemRadioGroup: TRadioGroup;
     RoundSpinEdit: TSpinEdit;
+    SendEnterCheckBox: TCheckBox;
+    TabSheet2: TTabSheet;
+    TargetSwRadioGroup: TRadioGroup;
+    PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TSwComboBox: TComboBox;
+    procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Label2Click(Sender: TObject);
+    procedure MsgSystemRadioGroupClick(Sender: TObject);
     procedure TargetSwRadioGroupClick(Sender: TObject);
   private
     { private declarations }
@@ -61,13 +68,19 @@ begin
           Looper := Process32Next(hSnap, Proc);
      end;
      CloseHandle(hSnap);
-     TSwComboBox.ItemIndex:=0;
-     TargetSwRadioGroupClick(self);
+     //TSwComboBox.ItemIndex:=0;
+     //TargetSwRadioGroupClick(self);
 end;
 
-procedure TSetupForm.Label2Click(Sender: TObject);
+procedure TSetupForm.MsgSystemRadioGroupClick(Sender: TObject);
 begin
+     if (MsgSystemRadioGroup.ItemIndex=2) and (TargetSwRadioGroup.ItemIndex=0) then
+        MsgSystemRadioGroup.ItemIndex:=0;
+end;
 
+procedure TSetupForm.FormActivate(Sender: TObject);
+begin
+     TargetSwRadioGroupClick(self);
 end;
 
 procedure TSetupForm.TargetSwRadioGroupClick(Sender: TObject);
@@ -75,14 +88,19 @@ begin
      case TargetSwRadioGroup.ItemIndex of
           0:begin
                  TSwComboBox.Enabled:=false;
-                 TSwComboBox.Text:='EXCEL.EXE';
+                 //TSwComboBox.Text:='EXCEL.EXE';
+                 TSwComboBox.ItemIndex:=TSwComboBox.Items.IndexOf('EXCEL.EXE');
+                 if TSwComboBox.ItemIndex=-1 then TargetSwRadioGroup.ItemIndex:=2;
           end;
           1:begin
                  TSwComboBox.Enabled:=false;
-                 TSwComboBox.Text:='soffice.bin';
+                 //TSwComboBox.Text:='soffice.bin';
+                 TSwComboBox.ItemIndex:=TSwComboBox.Items.IndexOf('soffice.bin');
+                 if TSwComboBox.ItemIndex=-1 then TargetSwRadioGroup.ItemIndex:=2;
           end;
-          2:begin
+          else begin
                  TSwComboBox.Enabled:=true;
+                 //TargetSwRadioGroup.ItemIndex:=2;
           end;
      end;
 end;

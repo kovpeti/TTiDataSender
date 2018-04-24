@@ -5,9 +5,9 @@ unit mainunit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, TTi1604DsplPanel, TTi1604comm, synaser,
-  Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons, ActnList,
-  ComCtrls, ExtCtrls;
+  Classes, SysUtils, FileUtil, TTi1604DsplPanel, TTi1604comm, synaser, Forms,
+  Controls, Graphics, Dialogs, StdCtrls, Buttons, ActnList, ComCtrls, ExtCtrls,
+  Variants, ComObj, ClipBrd, XMLPropStorage, MouseAndKeyInput;
 
 type
 
@@ -51,6 +51,7 @@ type
     ImageList1: TImageList;
     TTi1604Comm1: TTTi1604Comm;
     TTi1604DsplPanel1: TTTi1604DsplPanel;
+    XMLPropStorage1: TXMLPropStorage;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure SendButtonKeyDown(Sender: TObject; var Key: Word;
@@ -72,6 +73,8 @@ type
     procedure StartActionExecute(Sender: TObject);
     procedure TextSendEditEnter(Sender: TObject);
     procedure TextSendEditKeyPress(Sender: TObject; var Key: char);
+    procedure XMLPropStorage1RestoreProperties(Sender: TObject);
+    procedure XMLPropStorage1SavingProperties(Sender: TObject);
   private
     { private declarations }
   public
@@ -93,16 +96,15 @@ uses JwaWindows, jwatlhelp32, lcltype,math,setupunit,aboutunit;//,MouseAndKeyInp
 
 var TargetSoftware:string;
     Digits:integer;
-    //PortName:string;
-    //PortSpeed:integer;
     SendEnter:boolean;
     MyHandle:HWND;
     MyPID:DWORD;
     TargetHandle:HWND;
     TargetPID:DWORD;
-
-const
-     MyProgramName='TTi1604DataSender.exe';
+    MsgSystem:integer;  {0:WinMessaging,1:ClipBoard,2:UNO}
+    TargetSystem:integer; {0:MS Office,1:Open/Libre Office, 2:Other}
+    MoveCursor:integer;
+    SaveSettings:boolean;
 
 function GetProcessMainWindow(const PID: DWORD; const wFirstHandle: HWND): HWND;
 var
@@ -154,7 +156,7 @@ end;
 
 procedure GetMyHandle;
 begin
-  MyPID := FindProcessByName(MyProgramName);
+  MyPID := FindProcessByName(ApplicationName+'.exe');
   if MyPID <> 0 then
      MyHandle := GetProcessMainWindow(MyPID, MainForm.Handle);
 end;
@@ -173,7 +175,7 @@ begin
      ShowWindow(MyHandle, SW_RESTORE);
      SetWindowPos(MyHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
   end;
-  //MainForm.SendButton.SetFocus; //Without this app window may not show - Depends on wWin version??
+  //MainForm.SendButton.SetFocus; { TODO : Without this app window may not show - Depends on Win version?? }
 end;
 
 procedure SendControlKey(SendKey:integer);
@@ -184,11 +186,12 @@ begin
      begin
        ShowWindow(TargetHandle, SW_RESTORE);
        SetWindowPos(TargetHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
-       //For Vista and up
-       PostMessage(TargetHandle,WM_KEYDOWN,SendKey,0);
-       PostMessage(TargetHandle,WM_KEYUP,SendKey,0);
-       //For XP
-       //KeyInput.Press(SendKey);
+       if MsgSystem=0 then
+            begin //WinMsgSystem
+                   PostMessage(TargetHandle,WM_KEYDOWN,SendKey,0);
+                   PostMessage(TargetHandle,WM_KEYUP,SendKey,0);
+            end else //Every other case
+                   KeyInput.Press(SendKey);
        SetWindowPos(TargetHandle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
      end;
    //Switch back
@@ -199,51 +202,74 @@ procedure SendStringToExcel(SendStr:string);
 var
   i:integer;
 //  c:integer;
+var
+  Server, desktop, dispatcher: variant;
+
+  FUNCTION variantArray(): Variant;
+  BEGIN
+    variantArray:= VarArrayCreate([0, -1], varVariant);
+  END;
 begin
      if MainForm.StartAction.Enabled then exit; //If measure stopped then do nothing
      if TargetHandle = 0 then GetTargetHandle;
      if TargetHandle <> 0 then
-     begin
-       ShowWindow(TargetHandle, SW_RESTORE);
-       SetWindowPos(TargetHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
-         for i := 1 to Length(SendStr) do begin
-           //For Wista and up
-           PostMessage(TargetHandle, WM_CHAR, Word(SendStr[i]), 0);
-           {
-           -- This solution causes repeated key press --
-           c:=Word(SendStr[i]);
-           PostMessage(TargetHandle,WM_KEYDOWN,c,0);
-           PostMessage(TargetHandle,WM_KEYUP,c,0);}
-           //For XP
-      { TODO : Only standard keys are supported.
-Shifted characters eg !,",% are not.
-The problem is the different keyboard layouts.
-Need to test and clarify!
-7/3/18 - still not working on XP, repeat keys on Win7 }
-{                c:=Word(SendStr[i]);
-           if c=$2E then c:=VK_DECIMAL else           //$2E is the decimal point ASCII representative
-           if (c>=97) and (c<=122) then c:=c-32 else  //a..z
-           if (c>=65) and (c<=90) then begin         //A..Z
-              c:=c;
-               KeyInput.Apply([ssShift]);
-             end else
-           if (c>=48) and (c<=57) then c:=c else      //0..9
-           c:=0;                                       //Unsupported button
-           if c>=0 then KeyInput.Press(c);                // This will simulate press of F1 function key.
-           KeyInput.UnApply([ssShift]);                   //for capital letters
-}
-         end;
-       if SendEnter then begin
-         //Wista and up
-         PostMessage(TargetHandle,WM_KEYDOWN,VK_RETURN,0);
-         PostMessage(TargetHandle,WM_KEYUP,VK_RETURN,0);
-         //XP
-         //KeyInput.Press(VK_RETURN);
+        ShowWindow(TargetHandle, SW_RESTORE);
+        SetWindowPos(TargetHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
+       case MsgSystem of
+            0:begin {The Windows Message System is available from Win7 only}
+              for i := 1 to Length(SendStr) do begin
+                  PostMessage(TargetHandle, WM_CHAR, Word(SendStr[i]), 0);
+              end;
+              if SendEnter then begin
+                PostMessage(TargetHandle,WM_KEYDOWN,VK_RETURN,0);
+                PostMessage(TargetHandle,WM_KEYUP,VK_RETURN,0);
+              end;
+              case MoveCursor of
+                   0:begin PostMessage(TargetHandle,WM_KEYDOWN,VK_UP,0);PostMessage(TargetHandle,WM_KEYUP,VK_UP,0);end;
+                   1:begin PostMessage(TargetHandle,WM_KEYDOWN,VK_DOWN,0);PostMessage(TargetHandle,WM_KEYUP,VK_DOWN,0);end;
+                   2:begin PostMessage(TargetHandle,WM_KEYDOWN,VK_LEFT,0);PostMessage(TargetHandle,WM_KEYUP,VK_LEFT,0);end;
+                   3:begin PostMessage(TargetHandle,WM_KEYDOWN,VK_RIGHT,0);PostMessage(TargetHandle,WM_KEYUP,VK_RIGHT,0);end;
+              end;
+            end;
+            1:begin {Use ClipBoard}
+              Clipboard.Clear;
+              Clipboard.AsText:=SendStr;
+              //PasteClipBoard;
+              KeyInput.Apply([ssCtrl]);
+              sleep(10);
+              KeyInput.Press(VK_V);
+              sleep(10);
+              KeyInput.Unapply([ssCtrl]);
+              sleep(10);
+              if SendEnter then
+                 KeyInput.Press(VK_RETURN);
+              case MoveCursor of
+                   0:KeyInput.Press(VK_UP);
+                   1:KeyInput.Press(VK_DOWN);
+                   2:KeyInput.Press(VK_LEFT);
+                   3:KeyInput.Press(VK_RIGHT);
+              end;
+            end;
+            2:begin {Use Open/Libre Office UNO}
+              Server := CreateOleObject('com.sun.star.ServiceManager');
+              desktop := Server.createInstance('com.sun.star.frame.Desktop');
+              dispatcher := Server.createInstance('com.sun.star.frame.DispatchHelper');
+              dispatcher.executeDispatch(desktop.CurrentFrame, '.uno:Paste', '', 0, variantArray());
+              dispatcher:= unassigned;
+              desktop:= unassigned;
+              Server:= unassigned;
+              if SendEnter then
+                 KeyInput.Press(VK_RETURN);
+              case MoveCursor of
+                   0:KeyInput.Press(VK_UP);
+                   1:KeyInput.Press(VK_DOWN);
+                   2:KeyInput.Press(VK_LEFT);
+                   3:KeyInput.Press(VK_RIGHT);
+              end;
+            end;
        end;
-       SetWindowPos(TargetHandle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
-     end;
-   //Switch back
-   SwitchBack;
+     //Switch back
+     SwitchBack;
 end;
 
 procedure TMainForm.UpdateStatusBar;
@@ -263,22 +289,29 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
      DividerToolButton.Width:=212;  //Depends on Windows version, this control loose width property value
-     //Basic settings if Cancel pressed on Settings dialog
-     TargetSoftware:='EXCEL.EXE';
-     SendEnter:=true;
-     Digits:=2;
-     //RxString:='';
-     TTi1604Comm1.Port:='COM1';
-     TTi1604Comm1.Active:=false;
-     //TTi1604msgOFF
-     SettingsActionExecute(nil);
+     {Check saved settings}
+     if FileExists(ApplicationName+'.xml') then
+        XMLPropStorage1.Active:=true
+        else begin
+          {Basic settings}
+          TargetSoftware:='EXCEL.EXE';
+          SendEnter:=true;
+          Digits:=2;
+          MsgSystem:=0;
+          TTi1604Comm1.Port:='COM1';
+          TTi1604Comm1.Active:=false;
+          MoveCursor:=3;
+          SettingsActionExecute(nil);
+          if SaveSettings then XMLPropStorage1.Active:=true
+             else XMLPropStorage1.Active:=false;
+        end;
      UpdateStatusBar;
 end;
 
 procedure TMainForm.PrgInfoActionExecute(Sender: TObject);
 var AForm:TAboutForm;
 begin
-     //Open About dialog
+     {Open About dialog}
      AForm:=TAboutForm.Create(self);
      try
         AForm.ShowModal;
@@ -349,13 +382,17 @@ begin
 end;
 
 procedure TMainForm.SendActionExecute(Sender: TObject);
+//var Val:double;
+//    s:string;
 begin
-     SendStringToExcel(floattostrf(TTi1604DsplPanel1.Value,ffGeneral,8,Digits));
+//     Val:=TTi1604DsplPanel1.Value;
+//     s:=floattostrf(Val,ffFixed,8,Digits);
+     SendStringToExcel(floattostrf(TTi1604DsplPanel1.Value,ffFixed,8,Digits));
 end;
 
 procedure TMainForm.SendButtonKeyPress(Sender: TObject; var Key: char);
 begin
-     //If any button pressed apart from Enter, send focus to TextSendEdit.
+     {If any button pressed apart from Enter, send focus to TextSendEdit.}
      if (Key<>#13) then begin
         TextSendEdit.Text:=Key;
         TextSendEdit.SetFocus;
@@ -387,10 +424,13 @@ begin
         SForm.CommPortsComboBox.Items.AddStrings(SList);
         SForm.SendEnterCheckBox.Checked:=SendEnter;
         SForm.RoundSpinEdit.Value:=Digits;
-        if SForm.CommPortsComboBox.Items.Count > 0 then
-           SForm.CommPortsComboBox.ItemIndex := 0
-           else
-           SForm.CommPortsComboBox.Text := '';
+        SForm.MsgSystemRadioGroup.ItemIndex:=MsgSystem;
+        SForm.TargetSwRadioGroup.ItemIndex:=TargetSystem;
+        SForm.MoveCursorComboBox.ItemIndex:=MoveCursor;
+        SForm.SaveSettingsCheckBox.Checked:=SaveSettings;
+        SForm.TSwComboBox.Text:=TargetSoftware; { TODO : Text property will be changed even if correct here }
+        SForm.CommPortsComboBox.Text:=TTi1604Comm1.Port;
+
         if SForm.ShowModal=mrOK then begin
            TTi1604Comm1.Port:=SForm.CommPortsComboBox.Text;
            SendEnter:=SForm.SendEnterCheckBox.Checked;
@@ -400,6 +440,10 @@ begin
              TargetHandle := GetProcessMainWindow(TargetPID, MainForm.Handle);
            Digits:=SForm.RoundSpinEdit.Value;
            SendEnter:=SForm.SendEnterCheckBox.Checked;
+           MsgSystem:=SForm.MsgSystemRadioGroup.ItemIndex;
+           TargetSystem:=SForm.TargetSwRadioGroup.ItemIndex;
+           MoveCursor:=SForm.MoveCursorComboBox.ItemIndex;
+           SaveSettings:=SForm.SaveSettingsCheckBox.Checked;
         end;
      finally
        SForm.Free;
@@ -409,9 +453,6 @@ begin
 end;
 
 procedure TMainForm.StartActionExecute(Sender: TObject);
-var Ok:boolean;
-    b:byte;
-    Counter:integer;
 begin
      try
         TTi1604Comm1.Active:=true;
@@ -438,6 +479,33 @@ begin
         SendTextActionExecute(self);
         SendButton.SetFocus;
      end;
+end;
+
+procedure TMainForm.XMLPropStorage1RestoreProperties(Sender: TObject);
+begin
+  if FileExists(ApplicationName+'.xml') then begin
+     TTi1604Comm1.Port:=XMLPropStorage1.StoredValue['ComPort'];
+     Digits:=strtoint(XMLPropStorage1.StoredValue['Round']);
+     MsgSystem:=strtoint(XMLPropStorage1.StoredValue['MsgSystem']);
+     TargetSystem:=strtoint(XMLPropStorage1.StoredValue['TargetSystem']);
+     TargetSoftware:=XMLPropStorage1.StoredValue['TargetSoftware'];
+     SendEnter:=strtobool(XMLPropStorage1.StoredValue['SendEnter']);
+     MoveCursor:=strtoint(XMLPropStorage1.StoredValue['MoveCursor']);
+     SaveSettings:=strtobool(XMLPropStorage1.StoredValue['SaveSettings']);
+     UpdateStatusBar;
+  end;
+end;
+
+procedure TMainForm.XMLPropStorage1SavingProperties(Sender: TObject);
+begin
+     XMLPropStorage1.StoredValue['ComPort'] := TTi1604Comm1.Port;
+     XMLPropStorage1.StoredValue['Round'] := IntToStr(Digits);
+     XMLPropStorage1.StoredValue['MsgSystem'] := inttostr(MsgSystem);
+     XMLPropStorage1.StoredValue['TargetSystem'] := inttostr(TargetSystem);
+     XMLPropStorage1.StoredValue['TargetSoftware'] := TargetSoftware;
+     XMLPropStorage1.StoredValue['SendEnter'] := booltostr(SendEnter);
+     XMLPropStorage1.StoredValue['MoveCursor'] := inttostr(MoveCursor);
+     XMLPropStorage1.StoredValue['SaveSettings'] := BoolToStr(SaveSettings);
 end;
 
 end.

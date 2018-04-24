@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIG>
+  <TApplication>
+    <MainForm Round="2" ComPort="COM1" MsgSystem="1" SendEnter="0" MoveCursor="3" SaveSettings="-1" TargetSystem="0" TargetSoftware="EXCEL.EXE"/>
+  </TApplication>
+</CONFIG>
