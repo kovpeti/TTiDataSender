@@ -114,7 +114,7 @@ object AboutForm: TAboutForm
     ParentColor = False
     ParentFont = False
   end
-  object Label7: TLabel
+  object Label7: TLabel 
     Left = 48
     Height = 15
     Top = 160
